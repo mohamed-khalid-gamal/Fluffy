@@ -71,7 +71,9 @@
         border-radius: 12px;
         text-align: center;
         animation: popIn 0.6s ease;
+        position: relative;
       }
+
       @keyframes popIn {
         0% {
           transform: scale(0.5);
@@ -101,6 +103,10 @@
       #okBtn:hover {
         background: #e65a50;
       }
+      .modal-image {
+        max-width: 400px;
+        margin-bottom: 20px;
+      }
     </style>
   </head>
   <body>
@@ -119,9 +125,18 @@
       id="modal"
       class="modal">
       <div class="modal-content">
+        <!-- إضافة صورة -->
+        <img
+          src="lo.jpg"
+          alt="Love Image"
+          class="modal-image" />
         <div class="heart">❤️</div>
-        <h2>I love you so much, khod bosa 😗!</h2>
+        <h2> 🤎بحبك يا أحلى بجرة (بجرتى)</h2>
         <button id="okBtn">OK</button>
+        <!-- عنصر الصوت -->
+        <audio
+          id="modalSound"
+          src="WhatsApp Video 2025-03-26 at 22.mp3"></audio>
       </div>
     </div>
 
@@ -130,6 +145,7 @@
       const yesBtn = document.getElementById("yesBtn");
       const modal = document.getElementById("modal");
       const okBtn = document.getElementById("okBtn");
+      const modalSound = document.getElementById("modalSound");
 
       // دالة لتحريك زر "No" لمكان عشوائي ضمن حدود النافذة
       function moveNoButton() {
@@ -148,14 +164,18 @@
       // عند اقتراب المؤشر من زر "No"
       noBtn.addEventListener("mouseover", moveNoButton);
 
-      // عند الضغط على زر "Yes" تُعرض الرسالة مع أنيميشن لطيف
+      // عند الضغط على زر "Yes" تُعرض الرسالة مع أنيميشن لطيف وتشغيل الصوت
       yesBtn.addEventListener("click", function () {
         modal.classList.add("show");
+        // تشغيل الصوت
+        modalSound.currentTime = 0;
+        modalSound.play();
       });
 
       // عند الضغط على زر "OK" يتم إغلاق المودال
       okBtn.addEventListener("click", function () {
         modal.classList.remove("show");
+        modalSound.pause();
       });
     </script>
   </body>
