@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Do You Love Me?</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(to right, #ff9a9e, #fad0c4);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .container {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        position: relative;
+      }
+      h1 {
+        color: #ff6f61;
+        margin-bottom: 20px;
+      }
+      button {
+        font-size: 18px;
+        padding: 12px 24px;
+        margin: 10px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+      button:hover {
+        transform: scale(1.05);
+      }
+      #yesBtn {
+        background: #ff6f61;
+        color: white;
+      }
+      #noBtn {
+        background: #bbb;
+        color: white;
+        position: fixed;
+      }
+      /* أنماط المودال للرسالة */
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
+      }
+      .modal.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .modal-content {
+        background: white;
+        padding: 30px 50px;
+        border-radius: 12px;
+        text-align: center;
+        animation: popIn 0.6s ease;
+      }
+      @keyframes popIn {
+        0% {
+          transform: scale(0.5);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .heart {
+        color: #ff6f61;
+        font-size: 50px;
+        margin-bottom: 20px;
+      }
+      #okBtn {
+        background: #ff6f61;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background 0.3s;
+      }
+      #okBtn:hover {
+        background: #e65a50;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Do you love me?</h1>
+      <button id="yesBtn">Yes</button>
+      <button
+        id="noBtn"
+        style="left: 50%; top: 60%"
+        >No</button
+      >
+    </div>
+
+    <!-- مودال الرسالة -->
+    <div
+      id="modal"
+      class="modal">
+      <div class="modal-content">
+        <div class="heart">❤️</div>
+        <h2>I love you so much, khod bosa 😗!</h2>
+        <button id="okBtn">OK</button>
+      </div>
+    </div>
+
+    <script>
+      const noBtn = document.getElementById("noBtn");
+      const yesBtn = document.getElementById("yesBtn");
+      const modal = document.getElementById("modal");
+      const okBtn = document.getElementById("okBtn");
+
+      // دالة لتحريك زر "No" لمكان عشوائي ضمن حدود النافذة
+      function moveNoButton() {
+        const btnWidth = noBtn.offsetWidth;
+        const btnHeight = noBtn.offsetHeight;
+        const maxX = window.innerWidth - btnWidth;
+        const maxY = window.innerHeight - btnHeight;
+
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
+
+        noBtn.style.left = randomX + "px";
+        noBtn.style.top = randomY + "px";
+      }
+
+      // عند اقتراب المؤشر من زر "No"
+      noBtn.addEventListener("mouseover", moveNoButton);
+
+      // عند الضغط على زر "Yes" تُعرض الرسالة مع أنيميشن لطيف
+      yesBtn.addEventListener("click", function () {
+        modal.classList.add("show");
+      });
+
+      // عند الضغط على زر "OK" يتم إغلاق المودال
+      okBtn.addEventListener("click", function () {
+        modal.classList.remove("show");
+      });
+    </script>
+  </body>
+</html>
